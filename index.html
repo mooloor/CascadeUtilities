@@ -1,0 +1,62 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="cascade.css">
+	</head>
+	<body>
+		<div class="blockWrapper">
+			<button id="genNPC" onclick="triggerGenerateNPC()">Generate NPC</button>
+			<div id="NPCBlock" class="resultsElement">
+				<form id="NPCForm" onsubmit="return generateNPC()">
+					<input type="text" name="Name" placeholder="Name">
+					<input type="text" name="Job" placeholder="Job">
+					<input type="number" name="Age" placeholder="Age">
+					<select name="Home">
+						<option value="undefined" selected disabled>Home</option>
+						<option value="Heliosphere">Heliosphere</option>
+						<option value="Venus">Venus</option>
+						<option value="Earth">Earth</option>
+						<option value="Mars">Mars</option>
+						<option value="The Belt">The Belt</option>
+						<option value="The Jovian Republics">The Jovian Republics</option>
+						<option value="Saturn">Saturn</option>
+					</select>
+					<input type="submit" name="submit">
+				</form>
+				<div id="NPCData">
+					<p id="NPCName">Name</p>
+					<p id="NPCJob">Job</p>
+					<p id="NPCAge">Age</p>
+					<p id="NPCHome">Home</p>
+					<p id="NPCLikes">Likes</p>
+					<p id="NPCDislikes">Dislikes</p>
+				</div>
+			</div>
+		</div>
+
+		<div class="blockWrapper">
+			<button id="genChar" onclick="triggerGenerateCharacter()">Generate New Character</button>
+			<div id="NewCharBlock" class="resultsElement">
+				DOESN'T EXIST YET
+			</div>
+		</div>
+		<div class="blockWrapper">
+			<button id="import" onclick="triggerImportCharacter()">Import Character</button>
+			<div id="ImportBlock" class="resultsElement">
+				DOESN'T EXIST YET
+			</div>
+		</div>
+
+		<div class="blockWrapper">
+			<button id="rangedMiss" onclick="getRangedFailText()">Ranged Fail</button>
+			<p id="rangedFailText" class="resultsElement"></p>
+		</div>
+
+		<div class="blockWrapper">
+			<button id="meleeMiss" onclick="getMeleeFailText()">Melee Fail</button>
+			<p id="meleeFailText" class="resultsElement"></p>
+		</div>
+		<script src="scripts/cascadeGenerator.js"></script>
+		<script src="scripts/cascadeUtilities.js"></script>
+	</body>
+</html>
