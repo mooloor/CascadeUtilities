@@ -66,6 +66,9 @@ function generateNPC() {
 																					   .then(d=>NPC.name = d[0])
 																					   .then(()=>displayNPC(NPC));
 	}
+	else {
+		displayNPC(NPC);
+	}
 	return false;
 }
 
