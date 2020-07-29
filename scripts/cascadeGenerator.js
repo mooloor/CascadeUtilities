@@ -13,6 +13,11 @@ function triggerImportCharacter() {
 	document.querySelector("#ImportBlock").style.display = "block";
 }
 
+function triggerExport() {
+	document.querySelector("#NPCString").style.display = "block";
+	document.querySelector("#exportNPC").style.display = "none";
+}
+
 function generateNPC() {
 	let form = document.querySelector("#NPCForm");
 	let NPC = {
@@ -88,6 +93,7 @@ function displayNPC(npc){
 	document.querySelector("#NPCAge").innerHTML = "Age: " + npc.age;
 	document.querySelector("#NPCLikes").innerHTML = "Likes: " + npc.likes;
 	document.querySelector("#NPCDislikes").innerHTML = "Dislikes: " + npc.dislikes;
+	document.querySelector("#NPCString").innerHTML = encodeNPC(npc);
 }
 
 
@@ -109,6 +115,49 @@ function getWeightedRandom(dict){
 	return chosen;
 }
 
+function encodeNPC(npc){
+	NPCString = "NPC"
+	NPCString += npc.name.replace(" ","_");
+	NPCString += "&";
+	NPCString += npc.job.replace(" ", "_");
+	NPCString += "&";
+	NPCString += npc.home.replace(" ", "_");
+	NPCString +=  "&";
+	NPCString +=  npc.age;
+	NPCString += "&";
+	for (var i = 0; i < npc.likes.length; i++) {
+		var like = npc.likes[i].replace(" ", "_");
+		NPCString += like
+		if(i != npc.likes.length-1){
+			NPCString += "+";
+		}
+	}
+	NPCString += "&";
+	for (var i = 0; i < npc.dislikes.length; i++) {
+		var dislike = npc.dislikes[i].replace(" ", "_");
+		NPCString += dislike
+		if(i != npc.dislikes.length-1){
+			NPCString += "+";
+		}
+	}
+	var enc = btoa(NPCString);
+	decodeNPC(enc);
+	return enc;
+}
+
+function decodeNPC(npcStr) {
+	let NPCString = atob(npcStr).slice(3);
+	let NPC = {
+		"name": NPCString.split("&")[0].replace("_", " "),
+		"job": NPCString.split("&")[1].replace("_", " "),
+		"home": NPCString.split("&")[2].replace("_", " "),
+		"age": parseInt(NPCString.split("&")[3]),
+		"likes":NPCString.split("&")[4].replace("_", " ").split("+"),
+		"dislikes":NPCString.split("&")[5].replace("_", " ").split("+")
+	}
+	return NPC;
+}
+
 const subjects = [
 "Their job",
 "Anarchism",
@@ -121,6 +170,13 @@ const subjects = [
 "The government of Mars",
 "The government of The Belt",
 "The government of The Jovian Republics",
+"The Heliosphere",
+"Venus",
+"Earth",
+"Mars",
+"The Belt",
+"The Jovian Republcs",
+"Saturn",
 "Puppies",
 "Kittens",
 "Snakes",
